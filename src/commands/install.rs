@@ -4,6 +4,8 @@ use crate::commands::extract::extract;
 use crate::{log_fail, log_info};
 
 pub fn install(file: String) {
+    karen::escalate_if_needed().unwrap();
+    
     let package = match BinPkg::read(&file) {
         Ok(package) => {
             package
