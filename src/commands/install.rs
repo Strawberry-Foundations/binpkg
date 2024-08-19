@@ -14,9 +14,12 @@ pub fn install(file: String) {
             std::process::exit(1);
         }
     };
-    
+
     extract(file.clone(), "/tmp/_binpkg.workdir".to_string());
-    
+
     log_info!(format!("Installing {} version {}", package.metadata.id, package.metadata.version));
+    
     subprocess::Exec::shell("cp -r /tmp/_binpkg.workdir/* /").popen().unwrap();
+    subprocess::Exec::shell("rm -r /tmp/_binpkg.workdir").popen().unwrap();
+
 }
