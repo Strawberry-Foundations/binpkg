@@ -1,7 +1,7 @@
 use libspkg::binpkg::BinPkg;
 use libspkg::binpkg::err::BinPkgError;
 
-use crate::log_info;
+use crate::{log_fail, log_info};
 
 pub fn extract(file: String, destination: String) {
     let package = match BinPkg::read(&file) {
@@ -9,9 +9,8 @@ pub fn extract(file: String, destination: String) {
             package
         },
         Err(err) => {
-            let e: BinPkgError = *err.downcast_ref().unwrap();
-            println!("{e:?}");
-            println!("Error while reading package: {err}");
+            let _: BinPkgError = *err.downcast_ref().unwrap();
+            log_fail!(format!("Error while reading package: {err}"));
             std::process::exit(1);
         }
     };
