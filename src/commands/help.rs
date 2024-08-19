@@ -8,8 +8,7 @@ pub fn help() {
 {MAGENTA}{BOLD}Commands:{C_RESET}
     {CYAN}{BOLD}help:{C_RESET} Prints this message
     {CYAN}{BOLD}install <pkg>:{C_RESET} Installs a binpkg
-    {CYAN}{BOLD}extract <pkg> <dst>:{C_RESET} Installs a binpkg
-
+    {CYAN}{BOLD}extract <pkg> <dst>:{C_RESET} Extracts a binpkg file to a specific destination
 ");
     std::process::exit(0);
 }
