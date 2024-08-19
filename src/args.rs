@@ -1,8 +1,11 @@
 use std::env;
 use crate::colors::{BOLD, C_RESET, RED, RESET};
+use crate::commands;
 
+#[derive(Ord, PartialOrd, Eq, PartialEq)]
 pub enum Command {
     Install,
+    Extract,
     None
 }
 
@@ -15,7 +18,8 @@ pub struct Args {
 
 #[derive(Default)]
 pub struct Options {
-    pub file: String,
+    pub file: Option<String>,
+    pub destination: Option<String>,
 }
 
 impl Args {
@@ -40,32 +44,62 @@ impl Args {
 
         match args.command_str.as_str() {
             "install" => args.command = Command::Install,
+            "extract" => args.command = Command::Extract,
             _ => args.command = Command::None,
         }
 
         args
     }
+    
+    pub fn len(&self) -> usize {
+        self.args.len()
+    }
+    
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
 
     pub fn collect_options(&mut self) -> Options {
         let mut options = Options {
-            file: String::default(),
+            file: None,
+            destination: None
         };
 
 
         let mut iter = self.args.clone().into_iter().skip(1);
+        let args: Vec<String> = self.args.clone().into_iter().skip(1).collect();
 
-        while let Some(arg) = iter.next() {
-            let _ = arg.as_str();
-            if let Some(val) = iter.next() {
-                if let Ok(file) = val.parse::<String>() {
-                    options.file = file
-                } else {
-                    eprintln!("{RED}{BOLD} ! {RESET} Invalid file{C_RESET}");
+        match self.command {
+            Command::Install => {
+                if args.len() != 2 {
+                    commands::help::help();
+                    std::process::exit(1);
                 }
-            } else {
-                eprintln!("{RED}{BOLD} ! {RESET} Missing file{C_RESET}");
+                while let Some(arg) = iter.next() {
+                    let _ = arg.as_str();
+                    if let Some(val) = iter.next() {
+                        if let Ok(file) = val.parse::<String>() {
+                            options.file = Option::from(file)
+                        } else {
+                            eprintln!("{RED}{BOLD} ! {RESET} Invalid file{C_RESET}");
+                        }
+                    } else {
+                        eprintln!("{RED}{BOLD} ! {RESET} Missing file{C_RESET}");
+                    }
+                }
             }
+            Command::Extract => {
+                if args.len() != 3 {
+                    commands::help::help();
+                    std::process::exit(1);
+                }
+                
+                options.file = Some(args[1].clone());
+                options.destination = Some(args[2].clone())
+            }
+            _ => { }
         }
+
 
         options
     }
