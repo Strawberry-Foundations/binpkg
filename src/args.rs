@@ -65,7 +65,7 @@ impl Args {
         };
 
 
-        let iter = self.args.clone().into_iter().skip(1);
+        // let iter = self.args.clone().into_iter().skip(1);
         let args: Vec<String> = self.args.clone().into_iter().skip(1).collect();
 
         match self.command {
