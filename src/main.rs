@@ -12,6 +12,7 @@ fn main() {
 
     match args.command {
         Command::Install => commands::install::install(options.file.unwrap()),
+        Command::Info => commands::info::info(options.file.unwrap()),
         Command::Extract => commands::extract::extract(options.file.unwrap(), options.destination.unwrap()),
         Command::None => commands::help::help(),
     }
