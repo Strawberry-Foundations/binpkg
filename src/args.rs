@@ -4,6 +4,7 @@ use crate::commands;
 #[derive(Ord, PartialOrd, Eq, PartialEq)]
 pub enum Command {
     Install,
+    Info,
     Extract,
     None
 }
@@ -43,6 +44,7 @@ impl Args {
 
         match args.command_str.as_str() {
             "install" => args.command = Command::Install,
+            "info" => args.command = Command::Info,
             "extract" => args.command = Command::Extract,
             _ => args.command = Command::None,
         }
@@ -70,6 +72,14 @@ impl Args {
 
         match self.command {
             Command::Install => {
+                if args.len() != 1 {
+                    commands::help::help();
+                    std::process::exit(1);
+                }
+
+                options.file = Some(args[0].clone());
+            }
+            Command::Info => {
                 if args.len() != 1 {
                     commands::help::help();
                     std::process::exit(1);
