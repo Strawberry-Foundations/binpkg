@@ -50,11 +50,11 @@ impl Args {
 
         args
     }
-    
+
     pub fn len(&self) -> usize {
         self.args.len()
     }
-    
+
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
@@ -71,7 +71,7 @@ impl Args {
 
         match self.command {
             Command::Install => {
-                if args.len() != 2 {
+                if args.len() != 1 {
                     commands::help::help();
                     std::process::exit(1);
                 }
@@ -89,13 +89,13 @@ impl Args {
                 }
             }
             Command::Extract => {
-                if args.len() != 3 {
+                if args.len() != 2 {
                     commands::help::help();
                     std::process::exit(1);
                 }
-                
-                options.file = Some(args[1].clone());
-                options.destination = Some(args[2].clone())
+
+                options.file = Some(args[0].clone());
+                options.destination = Some(args[1].clone())
             }
             _ => { }
         }
