@@ -1,5 +1,4 @@
 use std::env;
-use crate::colors::{BOLD, C_RESET, RED, RESET};
 use crate::commands;
 
 #[derive(Ord, PartialOrd, Eq, PartialEq)]
@@ -66,7 +65,7 @@ impl Args {
         };
 
 
-        let mut iter = self.args.clone().into_iter().skip(1);
+        let iter = self.args.clone().into_iter().skip(1);
         let args: Vec<String> = self.args.clone().into_iter().skip(1).collect();
 
         match self.command {
