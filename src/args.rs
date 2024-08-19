@@ -75,18 +75,8 @@ impl Args {
                     commands::help::help();
                     std::process::exit(1);
                 }
-                while let Some(arg) = iter.next() {
-                    let _ = arg.as_str();
-                    if let Some(val) = iter.next() {
-                        if let Ok(file) = val.parse::<String>() {
-                            options.file = Option::from(file)
-                        } else {
-                            eprintln!("{RED}{BOLD} ! {RESET} Invalid file{C_RESET}");
-                        }
-                    } else {
-                        eprintln!("{RED}{BOLD} ! {RESET} Missing file{C_RESET}");
-                    }
-                }
+
+                options.file = Some(args[0].clone());
             }
             Command::Extract => {
                 if args.len() != 2 {
