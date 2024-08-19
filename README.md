@@ -1,0 +1,2 @@
+# binpkg
+Binpkg CLI
