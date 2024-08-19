@@ -5,3 +5,5 @@ edition = "2021"
 
 [dependencies]
 libspkg = { version = "0.1.6", features = ["binpkg"]}
+subprocess = "0.2.9"
+karen = "0.1.2"
