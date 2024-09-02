@@ -1,6 +1,6 @@
 [package]
 name = "binpkg-cli"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 [dependencies]
@@ -8,4 +8,4 @@ libspkg = { version = "0.1.6", features = ["binpkg"]}
 subprocess = "0.2.9"
 karen = "0.1.2"
 serde_yaml = "0.9.34"
-serde = { version = "1.0.208", features = ["derive"] }
+serde = { version = "1.0.209", features = ["derive"] }
