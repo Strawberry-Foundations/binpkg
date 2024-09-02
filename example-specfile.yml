@@ -1,0 +1,7 @@
+package:
+  name: Example package
+  id: example-package
+  version: 1.0.0
+  architecture: all
+  author: Strawberry Foundations <info@strawberryfoundations.org>
+  description: Example package!
