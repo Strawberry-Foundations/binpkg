@@ -17,8 +17,8 @@ pub struct SpecfilePackage {
 }
 
 impl Specfile {
-    pub fn from_file(path: &str) -> Self {
-        let specfile_content = open_specfile(path);
+    pub fn from_file(path: String) -> Self {
+        let specfile_content = open_specfile(path.as_str());
         serde_yaml::from_str(&specfile_content).unwrap()
     }
 }
