@@ -6,6 +6,7 @@ pub enum Command {
     Install,
     Info,
     Extract,
+    Create,
     None
 }
 
@@ -46,6 +47,7 @@ impl Args {
             "install" => args.command = Command::Install,
             "info" => args.command = Command::Info,
             "extract" => args.command = Command::Extract,
+            "create" => args.command = Command::Create,
             _ => args.command = Command::None,
         }
 
@@ -88,6 +90,15 @@ impl Args {
                 options.file = Some(args[0].clone());
             }
             Command::Extract => {
+                if args.len() != 2 {
+                    commands::help::help();
+                    std::process::exit(1);
+                }
+
+                options.file = Some(args[0].clone());
+                options.destination = Some(args[1].clone())
+            }
+            Command::Create => {
                 if args.len() != 2 {
                     commands::help::help();
                     std::process::exit(1);
