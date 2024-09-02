@@ -10,6 +10,7 @@ pub fn help() {
     {CYAN}{BOLD}install <pkg>:{C_RESET} Installs a binpkg
     {CYAN}{BOLD}info <pkg>:{C_RESET} Shows information about a binpkg
     {CYAN}{BOLD}extract <pkg> <dst>:{C_RESET} Extracts a binpkg file to a specific destination
+    {CYAN}{BOLD}create <specfile> <data>:{C_RESET} Creates a new binpkg
 ");
     std::process::exit(0);
 }
